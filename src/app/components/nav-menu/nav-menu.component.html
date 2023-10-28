@@ -1,0 +1,90 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport 
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      mode="over"
+      >
+    <mat-toolbar>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu_open</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <div *ngIf="menuFunc && moduleDefault">
+
+        <mat-button-toggle-group class="toolbar-nav" vertical="true" [(ngModel)]="opcionSeleccionadaNav" > <!-- menuFunc[ moduleDefault ][ 'navegacion' ].optionKey.url , optionKey --> <!-- menuFunc[ moduleDefault ][ 'navegacion' ].optionKey.url -->
+          <mat-button-toggle mat-button *ngFor="let optionKey of getObjectKeys( menuFunc[ moduleDefault ][ 'navegacion' ] )" (click)="seleccionaMenu( menuFunc[ moduleDefault ][ 'navegacion' ][ optionKey ].url ,optionKey  ); drawer.toggle();" [value]="menuFunc[ moduleDefault ][ 'navegacion' ][ optionKey ].url" >
+            <!-- <div>{{optionKey | json}}</div> -->
+            <div class="button-content-nav">
+              <mat-icon><img src="{{ menuFunc[ moduleDefault ][ 'navegacion' ][optionKey].img }}" alt="Imagen modulo"></mat-icon> <!--  -->
+              
+              <div class="nav-text" style="font-size: 10px;">{{ menuFunc[ moduleDefault ][ 'navegacion' ][optionKey].nombre }}</div> <!--  -->
+            </div>           
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+
+
+        <!--<a mat-list-item *ngFor="let optionKey of getObjectKeys( menuFunc[ moduleDefault ][ 'navegacion' ] )" href="#">{{ menuFunc[ moduleDefault ][ 'navegacion' ][optionKey]['nombre'] }}</a> -->
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar" color="primary">
+      <div class="left-section">
+        <button class="left-section-element"
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <mat-icon class="logo-menu-icon left-section-element" ><img class="logo-menu" src="../../../assets/img/Bs.png" alt="Logo Balu Seeds"></mat-icon>
+        <div *ngIf="menuModule && moduleDefault" class="show-on-large">
+
+          <mat-button-toggle-group class="toolbar-modulo" name="fontStyle" aria-label="Font Style" [(ngModel)]="opcionSeleccionada">
+            <mat-button-toggle class="left-section-button " mat-button *ngFor="let optionKey of getObjectKeys(menuModule)" (click)="seleccionaModulo( menuModule[optionKey].id )" value="{{ menuModule[optionKey].id }}" >
+              {{ menuModule[optionKey].nombre }}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+
+        </div>
+      </div>      
+      
+      <div class="centered-section">
+        <!-- Título en el centro -->
+        <h1>Balu Seeds</h1>
+      </div>
+
+      <div class="right-section">
+        <!-- Icono de usuario y menú desplegable a la derecha -->
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="logout()" ><mat-icon>exit_to_app</mat-icon> Cerrar sesión</button>
+          <button mat-menu-item (click)="miCuenta()" ><mat-icon>person_outline</mat-icon> Mi cuenta</button>
+        </mat-menu>
+    
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+    <!-- Seccion visible solo en movil, centrada abajo y fija-->
+  <div *ngIf="menuModule" class="show-on-small">
+            
+    <mat-button-toggle-group class="modulo-movil" name="fontStyle" aria-label="Font Style" [(ngModel)]="opcionSeleccionada">
+      <mat-button-toggle class="footer-item" mat-button *ngFor="let optionKey of getObjectKeys(menuModule)" (click)="seleccionaModulo(menuModule[optionKey].id)" value="{{menuModule[optionKey].id}}">
+        <div class="button-content">
+          <img src="{{ menuModule[optionKey].img }}" alt="Imagen modulo">
+          <p class="modulo-titulo">{{ menuModule[optionKey].nombre }}</p>
+        </div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

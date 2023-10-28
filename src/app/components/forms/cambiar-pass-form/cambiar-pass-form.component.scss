@@ -1,0 +1,131 @@
+
+:host{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /*background: #F9FAF4; */
+}
+.login-container {
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    /*justify-content: space-between;  */
+}
+
+.login-form {
+    width: 500px;
+    height: 600px;
+    position: relative;
+    background-color: #EEEEEE;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}  
+
+.login-logo{
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    display: inline-flex;
+}
+
+.login-empresa{
+    text-align: center;
+    color: #1A1C19;
+    font-size: 22px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+
+.login-tarjeta{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30;
+    display: inline-flex;
+}
+
+.login-imagen{
+    border-top-right-radius: 16px;
+    width: 500px;
+    height: 600px;
+}
+
+.btn_login{
+    display: block;
+    width: 100%;
+    border-radius:20px
+}
+
+.footer-login{
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+@media (max-width: 768px) {
+    .login-imagen {
+        display: none; /* Oculta la imagen en dispositivos móviles */
+    }
+    .login-form {
+        width: 100%;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+//Modificar los estlos de card
+mat-card{
+    max-width: 400px;
+    //margin: 2em auto;
+    text-align: center;
+    background-color: #EEEEEE;
+    border: none; /* Elimina el borde */
+  box-shadow: none; /* Elimina las sombras */
+} 
+
+mat-card-header{
+    display: unset;
+}
+
+mat-card-subtitle{
+    color: black;
+    margin-bottom: 20px;
+    font-size: 11px;
+}
+
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+mat-label{
+    color: #44483E;
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.50px;
+    word-wrap: break-word
+}
+// Modificamos los estilos de los campos del formulario de Angular Material 
+mat-form-field{
+    
+    display: block;
+    min-width: 300px;
+    width: 100%;
+}
+

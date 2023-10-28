@@ -1,0 +1,25 @@
+:host{
+    //display: flex;
+    justify-content: center;
+    margin: 50px 100px;
+}
+
+.titulo{
+    color: #1A1C19;
+    font-size: 57px;
+    font-family: Oswald;
+    font-weight: 500;
+    line-height: 64px;
+    word-wrap: break-word;
+    text-align: center;
+    display: block;
+  
+  }
+
+  @media (max-width: 938px) {
+    .titulo{
+        font-size: 37px;
+        margin: 0 10px;
+    }
+  
+}

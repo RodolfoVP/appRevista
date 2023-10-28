@@ -1,0 +1,130 @@
+<div class="table-container" >
+    <div class="contenedor-busqueda">
+      <div class="left-aligned ">
+        <button mat-button class="btn-volver" (click)="volverGeneral()">
+          <mat-icon>navigate_before</mat-icon> <span class="label-volver">Volver a {{nombreRetorno}}</span>
+        </button>
+      </div>
+
+      <mat-form-field id="search-form" class="right-aligned"  >
+        <input matInput (keyup)="applyFilter($event)" [(ngModel)]="texto" placeholder="Ingresa un término de búsqueda" #input>
+        <button *ngIf="mostrarLupa" matSuffix mat-icon-button aria-label="Limpiar" (click)="borrartexto()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button *ngIf="!mostrarLupa" matSuffix mat-icon-button aria-label="Buscar">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="tablaCampaigns" >
+   
+          <!-- STATUS Column -->
+          <ng-container matColumnDef="STATUS">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header > Estado </th>
+            <td mat-cell *matCellDef="let row"> 
+                <div [ngSwitch]="row.STATUS"> 
+                    <div *ngSwitchCase="'Activo'">
+                        <span class="item-tabla">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM8 15L3 10L4.41 8.59L8 12.17L15.59 4.58L17 6L8 15Z" fill="#3E691A"/>
+                            </svg> 
+                            <span class="table-texto">{{row.STATUS}}</span>
+                        </span>  
+                    </div> 
+                    <div *ngSwitchCase="'Inactivo'">
+                        <span class="item-tabla">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z" fill="#A3A329"/>
+                            </svg> <span class="table-texto">{{row.STATUS}}</span>
+                        </span>   
+                    </div> 
+                    <div *ngSwitchDefault>
+                        <span class="item-tabla">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 18H9.5V13H12L13 15H18V9H15L14 7H8V18ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22Z" fill="#E75223"/>
+                            </svg> <span class="table-texto">{{row.STATUS}}</span>
+                        </span>
+                    </div> 
+                </div>
+            </td>
+          </ng-container>
+
+          <!-- CAMPAIGNCODE Column -->
+          <ng-container matColumnDef="CAMPAIGNCODE" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="hide-column">Código</th>
+            <td mat-cell *matCellDef="let row" class="hide-column"> {{row.CAMPAIGNCODE}} </td>
+          </ng-container>
+      
+          <!-- DESCRIPTION Column -->
+          <ng-container matColumnDef="DESCRIPTION" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Descripción</th>
+            <td mat-cell *matCellDef="let row" > {{row.DESCRIPTION}} </td>
+          </ng-container>
+
+          <!-- RANGO_FECHAS Column -->
+          <ng-container matColumnDef="RANGO_FECHAS" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="hide-column" >Rango de fechas</th>
+            <td mat-cell *matCellDef="let row" class="hide-column" > {{row.RANGO_FECHAS}} </td>
+          </ng-container>
+
+          <!-- ACCCIONES Column -->
+          <ng-container matColumnDef="ACCIONES">
+            <th class="col-acciones" mat-header-cell *matHeaderCellDef mat-sort-header >Acciones</th>
+            <td class="col-acciones" mat-cell *matCellDef="let row"> 
+              <mat-menu #userMenu="matMenu" xPosition="before" class="menu-Campaigns" >
+                
+                  <ng-container *ngIf="row.STATUS == 'Inactivo' || row.STATUS == 'Cerrado'  ;else desactivado" >
+                    <button mat-menu-item (click)="goEstado( row.STATUS , row.DESCRIPTION , row.CAMPAIGNID )" >
+                    <mat-icon>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM8 15L3 10L4.41 8.59L8 12.17L15.59 4.58L17 6L8 15Z" fill="#3E691A"/>
+                      </svg>
+                    </mat-icon>
+                    Activar
+                  </button>
+                  </ng-container>
+                  <ng-template #desactivado>
+                    <button mat-menu-item (click)="goEstado( row.STATUS , row.DESCRIPTION , row.CAMPAIGNID )" >
+                    <mat-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z" fill="#A3A329"/>
+                      </svg> 
+                    </mat-icon> Desactivar 
+                  </button>
+                  </ng-template>
+                <button *ngIf="row.STATUS === 'Activo'" mat-menu-item (click)="goCerrar( row.CAMPAIGNID , row.DESCRIPTION )" >
+                    <mat-icon>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 18H9.5V13H12L13 15H18V9H15L14 7H8V18ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22Z" fill="#E75223"/>
+                    </svg>
+                    </mat-icon> Cerrar
+                </button>
+                <button *ngIf="row.STATUS == 'Activo'" mat-menu-item (click)="goEditar( row.CAMPAIGNID )" ><mat-icon>edit</mat-icon> Editar</button>
+              </mat-menu>
+              <button mat-icon-button [matMenuTriggerFor]="userMenu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Sin coincidencias para "{{input.value}}"</td>
+          </tr>
+        </table>         
+      
+        <mat-paginator class="paginador-tabla" [pageSizeOptions]="[ 10 ]" aria-label="Selecciona una página" ></mat-paginator>
+      </div>
+
+      <button class="ExtendedFab" mat-fab extended color="accent" (click)="goNewCampaign()">
+        <mat-icon class="iconNuevo">add</mat-icon>
+        <div class="LabelText">Nuevo</div>
+      </button>
+
+</div>
+<app-loading *ngIf="!mostrarTabla"></app-loading>

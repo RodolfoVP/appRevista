@@ -1,0 +1,68 @@
+ <ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="mesure-card" [formGroup]="mesureForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Código Unidad Medida</mat-label>
+                            <input  matInput formControlName="mesureCode"  [readonly]="esReadOnly" >
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="description?.errors?.['pattern']  && description?.touched ">
+                                El campo Descripción solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones SYMBOL -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Unidad</mat-label>
+                            <input  matInput formControlName="symbol"  >
+                            <mat-error *ngIf="symbol?.errors?.['required'] && symbol?.touched ">
+                                El campo Unidad es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="symbol?.errors?.['pattern'] && symbol?.touched ">
+                                El campo Unidad solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <!-- Validaciones MESURETYPE -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Tipo</mat-label>
+                            <mat-select formControlName="mesureType" >
+                                <mat-option *ngFor="let item of mesureTypeOpciones" [value]="item.MESURETYPEID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="mesureType?.errors?.['required'] && mesureType?.touched ">
+                                El campo Tipo es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="mesure-botonera" >
+                            <button mat-raised-button class="btn-mesure-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-mesure-confirmar" color="primary" [disabled]="mesureForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+

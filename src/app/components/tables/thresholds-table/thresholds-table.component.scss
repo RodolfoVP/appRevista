@@ -1,0 +1,169 @@
+table {
+    width: 100%;
+  }
+
+.contenedor-busqueda{
+  width: 100%;
+  display: flex; /* Utiliza flexbox para el diseño */
+  justify-content: flex-end; /* Alinea el contenido hacia el lado derecho */
+  align-items: center;
+}
+
+.left-aligned {
+  margin-right: auto; 
+  border-bottom: none !important; 
+  width: 68%;
+}
+
+.btn-volver{
+  width: 200px;
+  z-index:0;
+}
+.label-volver{
+  margin-left: 10px;
+  color: #424940;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.5px;
+}
+
+.right-aligned {
+  margin-left: auto; 
+  border-bottom: none !important; 
+  width: 32%;
+}
+
+.tablaCultivesNutrientsIrrigation, .paginador-tabla{
+  background: #F3F4EE;
+}
+
+.mat-mdc-menu-item, .mat-mdc-menu-item:visited, .mat-mdc-menu-item:link{
+  width: 200px !important; /* Establece el ancho fijo */
+  min-width:  200px !important;
+  max-width: 200px !important;
+  background-color: #EFEEE7;
+}
+
+::ng-deep .menu-Cultives-Nutrients-Irrigations {
+  background-color: #EFEEE7 !important; 
+}
+
+
+.item-tabla{
+  display: flex;
+  justify-content: flex-start;  
+}
+.table-texto{
+  margin-left: 5px;
+}
+
+  td, th {
+    width: 16%;
+  }
+.col-acciones{
+  width: 5%;
+}
+
+
+  .table-container {
+    margin: 0 120px; 
+  }
+
+.ExtendedFab{
+  height: 55px !important;
+  border-radius: 15px !important;
+  bottom: 140px;
+  right: 120px;
+  position:fixed !important;
+}
+
+/* Search bar */
+:host ::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper{
+  background-color: #E9E8E1 !important;
+  border-bottom-color: #E9E8E1 !important;
+  border-radius: 30px;
+  width: 100%;
+}
+
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before{
+  border-bottom-color: #E9E8E1 !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):hover .mdc-line-ripple::before{
+  border-bottom-color: #E9E8E1 !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled .mdc-line-ripple::after{
+  border-bottom-color: #E9E8E1 !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #E9E8E1 !important;
+  border-radius: 30px;
+}
+
+:host ::ng-deep  ::placeholder {
+  font-size: 12px; 
+}
+
+
+@media (max-width: 938px) {
+  .LabelText{
+    display: none;
+  }
+  .ExtendedFab{
+    width: 53px; 
+    bottom: 110px;
+    right: 10px;
+  }
+
+  .table-container {
+    margin: 0 0px; 
+  }
+  .hide-column {
+    display: none; /* O visibility: hidden; */
+  }
+
+  /* Ocultar el encabezado de las columnas */
+  .mat-header-row {
+    display: none;
+  }
+
+  /* Opcionalmente, ocultar el encabezado de la tabla en sí */
+  .mat-table-header {
+    display: none;
+  }
+
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    width: 100%;
+  }
+
+  .iconNuevo{
+    overflow: unset !important;
+    margin: 0px !important;
+  }
+
+  .contenedor-busqueda{
+    display: block;
+  }
+  .right-aligned{
+    width: 90%;
+    margin: 0px 20px;
+  }
+
+  .left-aligned{
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .mat-elevation-z8{
+    margin-bottom: 50px;
+  }
+}

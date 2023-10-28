@@ -1,0 +1,34 @@
+<div class="modal-contenedor-fertilizer-nutrient">
+    <div class="logo-nutrient">
+      <mat-icon><img src="../../../../assets/img/icon-general/nutrientes.svg" alt=""></mat-icon>
+    </div>
+    <h2 mat-dialog-title class="titulo-dialog-nutrient-fertilizer">Nutrientes del {{data.titulo}}</h2>
+    <mat-dialog-content class="modal-texto" >
+
+      <table mat-table [dataSource]="datosConcentration" class="table-duration">
+        <ng-container matColumnDef="DESCRIPTION">
+          <td class="nutrient-label" mat-cell *matCellDef="let data">{{ data.DESCRIPTION }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="CONCENTRATION">
+          <td class="nutrient-input" mat-cell *matCellDef="let data">
+            <mat-form-field appearance="outline">
+              <mat-label>Concentración (%)</mat-label>
+              <input matInput type="number" step="0.01" [(ngModel)]="data.CONCENTRATION" max="100" [id]="'input-' + data.NUTRIENTID" (input)="verificarInputs()" appNumberDecimal >
+
+            </mat-form-field>
+          </td>
+        </ng-container>
+      
+        <tr mat-row *matRowDef="let row; columns: ['DESCRIPTION', 'CONCENTRATION']"></tr>
+      </table>
+
+      <span *ngIf="tablaDisponible" >Primero configure los nutrientes.</span>
+        
+    </mat-dialog-content>
+    <mat-dialog-actions class="fertilizer-Nutrient-botonera">
+      <button mat-raised-button mat-dialog-close class="boton-modal">Cancelar</button>
+      <button mat-raised-button  *ngIf="!tablaDisponible"  [mat-dialog-close]="true" class="boton-guardar" color="primary" (click)="actualizaDuracion()"  [disabled]="!todosInputsTienenValor">Guardar</button>
+    </mat-dialog-actions>
+  </div>
+  

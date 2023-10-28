@@ -1,0 +1,98 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content> 
+                    <form class="fertilizer-card" [formGroup]="fertilizerForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Reg Fertilizante</mat-label>
+                            <input  matInput formControlName="fertilizerid"  [readonly]="esReadOnly" >
+                        </mat-form-field>
+                        
+                        <!-- Validaciones FERTILIZERCODE -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="fertilizercode" maxlength="50" >
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description" maxlength="256" >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="description?.errors?.['pattern']  && description?.touched ">
+                                El campo Descripción solo puede incluir caracteres alfabéticos y números.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones ABBREVIATION -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Abreviatura</mat-label>
+                            <input  matInput formControlName="abbreviation" maxlength="256" >
+                            <mat-error *ngIf="abbreviation?.errors?.['required'] && abbreviation?.touched ">
+                                El campo Abreviatura es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="abbreviation?.errors?.['pattern'] && abbreviation?.touched ">
+                                El campo Abreviatura solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <!-- Validaciones MESUREID -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Unidad</mat-label>
+                            <mat-select formControlName="mesureid" >
+                                <mat-option *ngFor="let item of mesureOpciones" [value]="item.MESUREID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="mesureid?.errors?.['required'] && mesureid?.touched ">
+                                El campo Tipo es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones FERTILIZERTYPE -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Tipo</mat-label>
+                            <mat-select formControlName="fertilizertype" >
+                                <mat-option value="1">Nutricional</mat-option>
+                                <mat-option value="2">Adicional</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="fertilizertype?.errors?.['required'] && fertilizertype?.touched ">
+                                El campo Tipo es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones PRICE -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Precio referencial</mat-label>
+                            <input matInput formControlName="price" maxlength="6" >
+                            <mat-error *ngIf="price?.errors?.['required'] && price?.touched ">
+                                El campo Precio es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="price?.errors?.['pattern'] && price?.touched ">
+                                El campo Precio solo puede incluir números.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="fertilizer-botonera" >
+                            <button mat-raised-button class="btn-fertilizer-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-fertilizer-confirmar" color="primary" [disabled]="fertilizerForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+

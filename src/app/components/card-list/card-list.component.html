@@ -1,0 +1,32 @@
+<div *ngIf="data;else notFound" class="card-container"> 
+  <mat-grid-list [cols]="columnasGrid" [rowHeight]="columnaHeight" >
+    <!--<div *ngFor="let item of data; let i = index" s> -->
+      <mat-grid-tile *ngFor="let item of data; let i = index" class="card" >
+        <!-- Aquí puedes personalizar el contenido de cada tarjeta -->
+      <mat-card class="card-large" [routerLink]="[ '/menu/'+ item.URL ]" >
+        <mat-card-header>
+          <mat-card-title>{{ item.SHORTDESCRIPTION }} </mat-card-title>
+          <mat-card-subtitle>{{ item.LONGDESCRIPTION }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ item.IMG }}" alt="Imagen de funcionalidad">
+      </mat-card> 
+
+      <mat-card class="card-small" [routerLink]="[ '/menu/'+ item.URL ]">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{ item.SHORTDESCRIPTION }}</mat-card-title>
+            <mat-card-subtitle>{{ item.LONGDESCRIPTION }}</mat-card-subtitle>
+            <img mat-card-sm-image src="{{ item.IMG }}" >
+          </mat-card-title-group>
+        </mat-card-header>
+      </mat-card>
+
+      <!-- Insertar un salto de línea después de cada tercer elemento para mostrar tres tarjetas por fila -->
+      <!--<div *ngIf="(i + 1) % 3 === 0" class="clearfix"></div> -->
+      </mat-grid-tile>
+  </mat-grid-list>
+    
+</div> 
+<ng-template #notFound>
+  <mat-spinner></mat-spinner>
+</ng-template>

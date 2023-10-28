@@ -1,0 +1,133 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+    
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="cost-center-card" [formGroup]="costCenterForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Cod registro Centro Costo</mat-label>
+                            <input  matInput formControlName="costCenterIdReg"  [readonly]="true"  >
+                        </mat-form-field>
+
+                        <!-- Validaciones COSTCENTERCODE  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="costCenterCode"   maxlength="50" >
+                            <mat-error *ngIf="costCenterCode?.errors?.['required'] && costCenterCode?.touched ">
+                                El campo Código es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="costCenterCode?.errors?.['pattern']  && costCenterCode?.touched ">
+                                El campo Código solo puede incluir caracteres alfanuméricos.
+                            </mat-error>
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  maxlength="256" >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones INICIO  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Fecha de Inicio</mat-label>
+                            <input matInput  [matDatepicker]="dp3" formControlName="startDate"  [readonly]="true">
+                            <mat-datepicker-toggle matIconSuffix matSuffix  [for]="dp3"></mat-datepicker-toggle>
+                            <mat-datepicker #dp3 disabled="false" color="primary"></mat-datepicker>
+                        </mat-form-field>
+
+                        <!-- Validaciones FIN  -->
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Fin (opcional)</mat-label>
+                            <input matInput  [matDatepicker]="dp1" formControlName="finishDate" [readonly]="true" >
+                            <mat-datepicker-toggle matIconSuffix matSuffix  [for]="dp1"></mat-datepicker-toggle>
+                            <button mat-icon-button matSuffix *ngIf="finishDate?.value != ''" (click)="limpiarFecha()">
+                                <mat-icon>clear</mat-icon>
+                                </button>
+                            <mat-datepicker #dp1 disabled="false" color="primary" ></mat-datepicker>
+                        </mat-form-field>    
+                        
+                        <!-- Validaciones CULTIVEID  -->
+                        <mat-form-field appearance="outline" > 
+                            <mat-label>Cultivo</mat-label>
+                            <mat-select formControlName="cultiveId" > <!-- [(ngModel)]="cultivoset"  -->
+                                <mat-option *ngFor="let item of cultiveOpciones" [value]="item.CULTIVEID">{{item.CULTIVE_DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-hint>Solo se listan los cultivos que están activos y cuentan con estados fenológicos configurados.</mat-hint>
+                            <mat-error *ngIf="cultiveId?.errors?.['required'] && cultiveId?.touched ">
+                                El campo cultivo es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones VARIETYID  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Variedad</mat-label>
+                            <mat-select formControlName="varietyId" >
+                                <mat-option *ngFor="let item of dataCultiveVariety[ cultiveId?.value ]" [value]="item.VARIETYID">{{item.VARIETY_DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-hint>Solo se listan las variedades que están activas y cuentan con estados fenológicos y duración configuradas.</mat-hint>
+                            <mat-error *ngIf="varietyId?.errors?.['required'] && varietyId?.touched ">
+                                El campo variedad es obligatorio.
+                            </mat-error>
+                        </mat-form-field>                       
+                        
+                        
+                        <!-- Validaciones CAMPAIGNID  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Campaña</mat-label>
+                            <mat-select formControlName="campaign" >
+                                <mat-option *ngFor="let item of campaignOpciones" [value]="item.CAMPAIGNID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="campaign?.errors?.['required'] && campaign?.touched ">
+                                El campo Campaña es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones MESUREID -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Unidad del área</mat-label>
+                            <mat-select formControlName="mesureId" >
+                                <mat-option *ngFor="let item of mesureOpciones" [value]="item.MESUREID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="mesureId?.errors?.['required'] && mesureId?.touched ">
+                                El campo Unidad del área es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones AREA  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Área</mat-label>
+                            <input  matInput formControlName="area"   maxlength="11" appNumberDecimalFour>
+                            <mat-error *ngIf="area?.errors?.['required'] && area?.touched ">
+                                El campo Área es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="area?.errors?.['pattern']  && area?.touched ">
+                                El campo Área solo puede incluir caracteres números.
+                            </mat-error>
+                        </mat-form-field>
+                    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="cost-center-botonera" >
+                            <button mat-raised-button class="btn-cost-center-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-cost-center-confirmar" color="primary" [disabled]="costCenterForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+
+ 

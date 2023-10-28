@@ -1,0 +1,158 @@
+.form-container {
+    text-align: center;
+    padding: 20px;
+}
+  
+.form-title {
+    margin-bottom: 40px;
+    color:#1A1C19;
+    text-align: center;
+
+    /* M3/display/large */
+    font-family: Oswald;
+    font-size: 57px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 64px; /* 112.281% */
+    letter-spacing: -0.25px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mat-form-field {
+    width: 380px; /* Puedes ajustar el ancho según tus preferencias */
+    margin: 10px 0;
+}
+
+.campaign-botonera{
+    justify-content: end !important;
+}
+
+.btn-campaign-cancelar{
+    border: 1px solid #74796D;
+    border-radius: 30px;
+    margin-right: 40px;
+    color: #3E691A !important;
+    box-shadow: none;
+    height: 40px !important;
+}
+
+.btn-campaign-confirmar{
+    border-radius: 30px;
+    box-shadow: none;
+    height: 40px !important;
+}
+
+//Modificar los estlos de card
+mat-card{
+    max-width: 700px;
+    //margin: 2em auto;
+    text-align: center;
+    background-color: #FFFFFF;
+    border: none; /* Elimina el borde */
+  box-shadow: none; /* Elimina las sombras */
+} 
+
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-label{
+    color: #44483E;
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.50px;
+    word-wrap: break-word
+}
+// Modificamos los estilos de los campos del formulario de Angular Material 
+mat-form-field{    
+    display: block;
+    min-width: 660px;
+    width: 100%;
+}
+
+.fila-fecha{
+    display: flex;
+    min-width:580px ;
+    justify-content: space-between
+  }
+
+  ::ng-deep .col-fecha-ini  {
+    width: 48% !important;
+    min-width:220px !important;
+  }
+
+ ::ng-deep .col-fecha-fin{
+    width: 48% !important;
+    min-width:280px !important;
+  }
+
+
+@media (max-width: 938px) {
+    mat-card{
+        max-width: 100%  !important;
+        margin-right: 3px;
+        margin-left: 3px;
+        margin-bottom: 30px;
+    } 
+    mat-form-field{    
+        min-width: 200px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    ::ng-deep .campaign-card{
+        width: 330px;
+
+    }
+    .btn-campaign-cancelar{
+        margin-right: 20px;
+    }
+
+    .mat-form-field {
+        width: 100%; /* Puedes ajustar el ancho según tus preferencias */
+        margin: 5px 0;
+    }
+
+    .form-container {
+        padding: 10px;
+    }
+
+    .form-title {
+        font-size: 36px;
+        margin-bottom: 0px;
+    }
+
+    .fila-fecha{
+        display: block;
+        min-width:200px ;
+        //justify-content: space-between
+      }
+    
+      ::ng-deep .col-fecha-ini  {
+        width: 100% !important;
+        min-width:100px !important;
+      }
+    
+     ::ng-deep .col-fecha-fin{
+        width: 100% !important;
+        min-width:100px !important;
+      }
+
+}
+
+::ng-deep .codigo-disabled {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    /* otros estilos deseados */
+  }
+

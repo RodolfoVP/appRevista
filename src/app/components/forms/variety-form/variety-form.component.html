@@ -1,0 +1,64 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="mesure-card" [formGroup]="varietyForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Cod registro variedad</mat-label>
+                            <input  matInput formControlName="varietyIdReg"  [readonly]="true"  >
+                        </mat-form-field>
+
+                        <!-- Validaciones VARIETYCODE  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="varietyCode"  maxlength="50" >
+                            <mat-error *ngIf="varietyCode?.errors?.['required'] && varietyCode?.touched ">
+                                El campo Código es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="varietyCode?.errors?.['pattern']  && varietyCode?.touched ">
+                                El campo Código solo puede incluir caracteres alfanuméricos.
+                            </mat-error>
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  maxlength="256" >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="description?.errors?.['pattern']  && description?.touched ">
+                                El campo Descripción solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones CULTIVEID  -->
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Cod cultivo</mat-label>
+                            <input  matInput formControlName="cultiveId"  >
+                        </mat-form-field>
+        
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="variety-botonera" >
+                            <button mat-raised-button class="btn-variety-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-variety-confirmar" color="primary" [disabled]="varietyForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+
+ 

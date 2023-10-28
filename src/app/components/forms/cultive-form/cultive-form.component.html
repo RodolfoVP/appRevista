@@ -1,0 +1,58 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="mesure-card" [formGroup]="cultiveForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Cod registro Campania</mat-label>
+                            <input  matInput formControlName="cultiveIdReg"  [readonly]="true"  >
+                        </mat-form-field>
+
+                        <!-- Validaciones CULTIVECODE  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="cultiveCode"  maxlength="50" >
+                            <mat-error *ngIf="cultiveCode?.errors?.['required'] && cultiveCode?.touched ">
+                                El campo Código es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="cultiveCode?.errors?.['pattern']  && cultiveCode?.touched ">
+                                El campo Código solo puede incluir caracteres alfanuméricos.
+                            </mat-error>
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  maxlength="256" >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="description?.errors?.['pattern']  && description?.touched ">
+                                El campo Descripción solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="cultive-botonera" >
+                            <button mat-raised-button class="btn-cultive-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-cultive-confirmar" color="primary" [disabled]="cultiveForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+
+ 
