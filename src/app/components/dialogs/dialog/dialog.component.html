@@ -1,0 +1,8 @@
+<div class="modal-contenedor">
+  <h2 mat-dialog-title>{{data.titulo}}</h2>
+  <mat-dialog-content class="modal-texto" >{{data.mensaje}}</mat-dialog-content>
+  <mat-dialog-actions class="usuario-botonera">
+    <button mat-raised-button mat-dialog-close class="boton-modal">Cancelar</button>
+    <button mat-raised-button [mat-dialog-close]="true" class="boton-modal" >Confirmar</button>
+  </mat-dialog-actions>
+</div>

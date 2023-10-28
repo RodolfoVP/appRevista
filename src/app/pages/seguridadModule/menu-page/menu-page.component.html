@@ -1,0 +1,6 @@
+<ng-container *ngIf="token;else notFound">
+    <app-nav-menu ></app-nav-menu>
+</ng-container>
+<ng-template #notFound>
+    <mat-spinner></mat-spinner>
+</ng-template>

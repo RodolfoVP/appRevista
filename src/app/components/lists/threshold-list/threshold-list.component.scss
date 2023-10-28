@@ -1,0 +1,128 @@
+.left-aligned {
+  margin-right: auto; 
+  border-bottom: none !important; 
+  width: 68%;
+  margin-left: 40px;
+}
+
+.btn-volver{
+  width: 200px;
+  z-index:0;
+}
+.label-volver{
+  margin-left: 10px;
+  color: #424940;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.5px;
+}
+
+.right-aligned {
+  margin-left: auto; 
+  border-bottom: none !important; 
+  width: 32%;
+}
+
+.contenedor-list{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.item-list{
+  min-height:70px ;
+}
+/*
+.item-list{
+  display: flex;
+  justify-content: space-between; 
+}
+*/
+:host ::ng-deep .mat-mdc-list-item-unscoped-content{
+  display: flex !important;
+  justify-content: space-between !important; /* Puedes usar otros valores como 'flex-start', 'center', 'flex-end', 'space-around', etc. */
+  align-items: center !important;
+}
+
+mat-form-field{
+  margin-top: 10px;
+  //margin-bottom: 10px;
+  margin-right: 20px;
+  width: 160px;
+  //background-color: #E3E3DC;
+}
+mat-slide-toggle{
+  margin-right: 10px;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #E9E8E1 !important;
+}
+
+.switch{
+  width: 50%;
+}
+.icon-threshold{
+  width: 5%;
+}
+.inputs{
+  width: 45%;
+  display: flex;
+  align-items: center;
+}
+.icon-edit{
+    border: 1px solid #44483E;
+    color: #44483E;
+    border-radius: 100px;
+    padding: 5px;
+    //cursor: pointer;
+}
+.icon-check{
+    border: 1px solid #44483E;
+    color: #44483E;
+    border-radius: 100px;
+    padding: 5px;
+    //cursor: pointer;
+}
+
+/*
+:host ::ng-deep .mdc-switch__track{
+  width: 48px;
+  height: 32px !important;
+  flex-shrink: 0;
+  border-radius: 100px !important;
+  background: #F4F4ED;
+}
+*/
+/*
+:host ::ng-deep .mat-mdc-slide-toggle{
+  --mdc-switch-selected-track-color: #33691e !important;
+  --mdc-switch-selected-focus-track-color: #33691e !important;
+  --mdc-switch-selected-pressed-state-layer-color: #33691e !important;
+  --mdc-switch-selected-hover-state-layer-color: #33691e !important;
+  --mdc-switch-selected-hover-track-color: #33691e !important;
+  --mdc-switch-selected-pressed-track-color: #33691e !important;
+  --mdc-switch-selected-handle-color: #33691e !important;
+  --mdc-switch-selected-focus-state-layer-color: #33691e !important;
+}
+*/
+/*
+:host ::ng-deep .mdc-switch__handle{
+  width: 48px;
+  height: 48px !important;
+  flex-shrink: 0;
+}
+*/
+
+@media (max-width: 938px) {
+  .right-aligned{
+    width: 90%;
+    margin: 0px 20px;
+  }
+
+  .left-aligned{
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,61 @@
+<div class="login-container">
+    <div class="login-form">
+        <div class="login-logo">
+            <img class="login-image" src="../../../assets/img/Bs.png" alt="Imagen de fondo" >
+            <div class="login-empresa">Balú Seeds SAC</div>
+        </div>
+        <div class="login-tarjeta">
+            <mat-card>
+                <!-- Cabecera de la tarjeta -->
+                <mat-card-header>
+                    <mat-card-title>
+                        ¡Bienvenido!
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Ingresa tus credenciales para continuar.
+                    </mat-card-subtitle>
+                </mat-card-header>
+    
+                <!-- Contenido de la tarjeta -->
+                <mat-card-content >
+                    <!-- Formulario de login -->
+                    <form class="login-card" [formGroup]="loginForm"  (submit)="submitLogin()">
+    
+                        <mat-form-field >
+                            <mat-label>Código Personal</mat-label>
+
+                            <input  matInput formControlName="usercode" (input)="registraUsercode($event)" >
+                            <mat-error *ngIf="usercode?.errors?.['required'] && usercode?.touched ">
+                                El campo Código Personal es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="usercode?.errors?.['minlength'] && usercode?.touched ">
+                                Ingresa al menos 8 caracteres
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field>
+                            <mat-label>Contraseña</mat-label>
+
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (input)="registraPass($event)" >
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                            <mat-error *ngIf="password?.errors?.['required'] && password?.touched ">
+                                El campo contraseña es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Boton para submit del formulario -->
+                        <!-- Deshabilitado si el formulario de login es invalido -->
+                        <button class="btn_login" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid" >Iniciar sesión</button>
+                        <p class="footer-login">Contacta al administrador si olvidaste tu contraseña.</p>
+                    </form>
+                </mat-card-content>
+
+                <div #toastContainer></div>
+
+            </mat-card>
+        </div>
+    </div>
+    <img class="login-imagen" src="../../../assets/img/balu_login.png" alt="Imagen de fondo" >
+</div>

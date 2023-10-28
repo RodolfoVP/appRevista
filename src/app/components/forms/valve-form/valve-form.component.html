@@ -1,0 +1,80 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="valve-card" [formGroup]="valveForm" >
+                        
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Código registro Válvula</mat-label>
+                            <input  matInput formControlName="valveIdReg"  [readonly]="esReadOnly" >
+                        </mat-form-field>
+                        
+                        <!-- Validaciones VALVECODE  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="valveCode"   maxlength="50" >
+                            <mat-error *ngIf="valveCode?.errors?.['required'] && valveCode?.touched ">
+                                El campo Código es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="valveCode?.errors?.['pattern']  && valveCode?.touched ">
+                                El campo Código solo puede incluir caracteres alfanuméricos.
+                            </mat-error>
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="description?.errors?.['pattern']  && description?.touched ">
+                                El campo Descripción solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones MESURE -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Unidad del área</mat-label>
+                            <mat-select formControlName="mesureId" >
+                                <mat-option *ngFor="let item of mesureOpciones" [value]="item.MESUREID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="mesureId?.errors?.['required'] && mesureId?.touched ">
+                                El campo unidad del área es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Validaciones AREA  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Área</mat-label>
+                            <input  matInput formControlName="area"   maxlength="11" appNumberDecimalFour>
+                            <mat-error *ngIf="area?.errors?.['required'] && area?.touched ">
+                                El campo Área es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="area?.errors?.['pattern']  && area?.touched ">
+                                El campo Área solo puede incluir caracteres números.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="valve-botonera" >
+                            <button mat-raised-button class="btn-valve-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-valve-confirmar" color="primary" [disabled]="valveForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>

@@ -1,0 +1,97 @@
+
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="usuario-card" [formGroup]="usuarioForm" >
+                        <mat-form-field appearance="outline" [class]="esReadOnly ? 'codigo-disabled' : ''" >
+                            <mat-label>Código Personal</mat-label>
+                            <input  matInput formControlName="usercode" (input)="registraUsercode($event)" maxlength="11"  [readonly]="esReadOnly" >
+                            <mat-error *ngIf="usercode?.errors?.['required'] && usercode?.touched ">
+                                El campo Código Personal es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="usercode?.errors?.['minlength'] && usercode?.touched ">
+                                Ingresa al menos 8 caracteres
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- Validaciones CORREO -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Correo</mat-label>
+                            <input  matInput formControlName="correo"  >
+                            <mat-error *ngIf="correo?.errors?.['required'] && correo?.touched ">
+                                El campo Correo es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="(correo?.errors?.['email'] || correo?.errors?.['invalidDomain'] ) && correo?.touched ">
+                                El formato del Correo no es valido.
+                            </mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                    
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (input)="registraPass($event)" maxlength="14"  >
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                            <mat-error *ngIf="password?.errors?.['required'] && password?.touched ">
+                                El campo contraseña es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones NOMBRES -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Nombres</mat-label>
+                            <input  matInput formControlName="nombres"  >
+                            <mat-error *ngIf="nombres?.errors?.['required'] && nombres?.touched ">
+                                El campo Nombres es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="nombres?.errors?.['pattern'] && nombres?.touched ">
+                                El campo Nombres solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones APELLIDOS -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Apellidos</mat-label>
+                            <input  matInput formControlName="apellidos"  >
+                            <mat-error *ngIf="apellidos?.errors?.['required'] && apellidos?.touched ">
+                                El campo Apellidos es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="apellidos?.errors?.['pattern'] && apellidos?.touched ">
+                                El campo Apellidos solo puede incluir caracteres alfabéticos y especiales.
+                            </mat-error>
+                        </mat-form-field>
+        
+                        <!-- Validaciones ROL -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Rol</mat-label>
+                            <mat-select formControlName="rol" >
+                                <mat-option *ngFor="let item of rolesOpciones" [value]="item.ROLEID">{{item.DESCRIPTION}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="rol?.errors?.['required'] && rol?.touched ">
+                                El campo Rol es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="usuario-botonera" >
+                            <button mat-raised-button class="btn-usuario-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-usuario-confirmar" color="primary" [disabled]="usuarioForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>

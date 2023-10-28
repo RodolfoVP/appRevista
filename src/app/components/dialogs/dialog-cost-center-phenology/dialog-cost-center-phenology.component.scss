@@ -1,0 +1,91 @@
+::ng-deep .variety-Phenology-botonera{
+    justify-content: end !important;
+}
+
+::ng-deep .modal-contenedor{
+    width: 600px;
+    background-color: #E9E8E1 !important;
+}
+
+::ng-deep .boton-modal{
+    color: #3E691A !important;
+    box-shadow: none !important;
+    background-color: #E9E8E1 !important;
+    border-radius: 100px !important;
+    border: 1px solid #74796D !important;
+}
+
+::ng-deep .boton-guardar{
+    box-shadow: none !important;
+    border-radius: 100px !important;
+}
+
+::ng-deep .table-duration{
+    background-color: #E9E8E1 !important;
+    //width: 100px !important;
+}
+
+::ng-deep .modal-texto{
+    color:#44483E !important;
+}
+
+.fenologia-label{
+    text-align: center !important;
+    padding-top: 5px !important;
+    width: 50%;
+    color: #1A1C18;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.5px;
+}
+.fenologia-input{
+    text-align: center !important;
+    padding-top: 5px !important;
+    width: 50%;
+}
+.logo-fenologia{
+    text-align: center !important;
+    padding-top: 15px !important;
+}
+
+.dialog-from-bottom-mobile {
+    transform: translateY(100%);
+    top: 100%;
+}
+
+
+@media (max-width: 938px) {
+    ::ng-deep .modal-contenedor{
+        //width: 100% !important;
+        width:auto;
+        bottom: 0px !important;
+        position: fixed;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        background-color: #E9E8E1 !important;
+    } 
+
+    //.fenologia-input{
+        //width: 25px;
+    //}
+    //.fenologia-label{
+       // width: 25px;
+    //}
+
+    mat-form-field{
+        width: 120px !important;
+    }
+
+    mat-label{
+        font-size:10px
+    }
+
+}
+
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
+    border-radius: 28px;
+  }

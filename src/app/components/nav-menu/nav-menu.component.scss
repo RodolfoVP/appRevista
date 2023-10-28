@@ -1,0 +1,252 @@
+//Toolbar 
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 10px; 
+}
+
+.left-section {
+  display: flex;
+  align-items: center; 
+  padding: 10px;
+}
+
+.left-section mat-icon {
+  font-size: 24px; 
+  margin-right: 10px; 
+  height: 35px;
+}
+
+.left-section mat-icon img {
+  max-height: 100%; 
+  max-width: 100%; 
+}
+
+.centered-section {
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  font: Roboto;
+}
+
+.right-section {
+  position: absolute; 
+  right: 10px; 
+  display: flex;
+  align-items: center; 
+}
+
+.right-section button {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  background-color: transparent; 
+  border: none; 
+  cursor: pointer; 
+  padding: 0; 
+}
+
+.right-section button mat-icon {
+  font-size: 24px; 
+}
+
+.logo-menu{
+  height: 15px;
+}
+
+// Barra inferior en modo movil 
+.show-on-large {
+  display: flex; 
+  background: #EFEEE7;
+}
+
+.show-on-small {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1000; 
+  background: #EFEEE7;
+}
+
+.footer-item{
+  text-align: center;
+  
+}
+
+@media (min-width: 938px) {
+  .show-on-large {
+    display: flex; 
+  }
+  .show-on-small {
+    display: none;
+  }
+  .nav-text{
+    display: none;
+  }
+
+  .sidenav {
+    width: 100px;
+  }
+
+  .button-content-nav{
+    line-height: normal;
+    margin: 5px 0px;
+  }
+
+  mat-button-toggle{
+    font-size: 14px;
+    width: 100px;
+    background: #EFEEE7;
+  }
+
+  mat-button-toggle-label-content {
+    width: 10px; /* Cambia el valor (100px) según tus preferencias */
+  }
+
+  mat-toolbar{
+    background: #EFEEE7;
+    color: black;
+    justify-content: center;
+  }
+
+  .logo-menu-icon{
+    padding: 7px 0px;
+  }
+
+  .left-section .left-section-element {
+    margin-right: 20px; 
+  }
+
+  .left-section .left-section-button {
+    margin-right: 15px; 
+    color:#44483E;
+  }
+
+}
+
+/* Estilos para dispositivos pequeños (móvil) */
+@media (max-width: 938px) {
+  .show-on-large {
+    display: none;
+  }
+  .show-on-small {
+    display: block; 
+  }
+
+  .mat-icon{
+    display: flex;
+  }
+
+  .button-content-nav{
+    line-height: normal;
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-text{
+    width: 70px;
+    text-align: left;
+    padding-left: 2px;
+  }
+
+  mat-button-toggle{
+    font-size: 14px;
+    width: 130px;
+    background: #EFEEE7;
+    margin: 2px 0px 0px 0px;
+  }
+
+  .mat-button-toggle-label-content {
+    width: 10px; /* Cambia el valor (100px) según tus preferencias */
+    padding: 0px 6px !important;
+  }
+
+  .sidenav {
+    width: 130px;
+  }
+
+  mat-toolbar{
+    background: #EFEEE7;
+    color: black;
+    justify-content: left;
+  }
+
+  .logo-menu-icon{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-section .left-section-element {
+    margin-right: 10px; 
+  }
+  
+}
+
+mat-button-toggle-group {
+  border: none; 
+}
+
+.toolbar-modulo .mat-button-toggle.mat-button-toggle-checked {
+  border-bottom: 2px solid #3E691A; 
+}
+
+.modulo-movil .mat-button-toggle.mat-button-toggle-checked {
+  background-color: #DAE7C9;
+  border-radius: 50px; 
+}
+
+.toolbar-nav .mat-button-toggle.mat-button-toggle-checked {
+    background-color: #DAE7C9;
+    border-radius: 50px;
+}
+
+.toolbar-nav .mat-button-toggle.mat-button-toggle-checked .nav-text{
+  display: block;
+}
+
+.mat-button-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #EFEEE7;
+}
+
+
+.button-content img {
+  max-width: 100%; /* Asegura que la imagen se ajuste al ancho del botón */
+  
+}
+
+.modulo-titulo{
+  margin:0px;
+}
+
+.modulo-movil{
+  height: 60px;
+}
+.button-content{
+  line-height: normal;
+}
+
+.mat-sidenav{
+  background: #EFEEE7;
+}

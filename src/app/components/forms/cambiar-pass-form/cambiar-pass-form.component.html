@@ -1,0 +1,63 @@
+<div class="login-container">
+    <div class="login-form">
+        <div class="login-logo">
+            <img class="login-image" src="../../../assets/img/Bs.png" alt="Imagen de fondo" >
+            <div class="login-empresa">Balú Seeds SAC</div>
+        </div>
+        <div class="login-tarjeta">
+            <mat-card>
+                <!-- Cabecera de la tarjeta -->
+                <mat-card-header>
+                    <mat-card-title>
+                        Actualiza tu contraseña
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Al ser tu primer acceso debes cambiar tu contraseña
+                    </mat-card-subtitle>
+                </mat-card-header>
+    
+                <!-- Contenido de la tarjeta -->
+                <mat-card-content >
+                    <!-- Formulario de login -->
+                    <form class="login-card" [formGroup]="confirmPassForm"  (submit)="submitConfirmPass()">
+    
+                        <mat-form-field>
+                            <mat-label>Contraseña actual</mat-label>
+
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (input)="registraPass($event)" >
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password current'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                            <mat-error *ngIf="password?.errors?.['required'] && password?.touched ">
+                                El campo contraseña es obligatorio
+                            </mat-error>
+                            <!-- TODO: Implementar validación del formato de contraseña -->
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Contraseña nueva</mat-label>
+
+                            <input matInput [type]="hideNew ? 'password' : 'text'" formControlName="passwordNew" (input)="registraPassNew($event)" >
+                            <a mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password New'" [attr.aria-pressed]="hideNew">
+                                <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                            <mat-error *ngIf="password?.errors?.['required'] && password?.touched ">
+                                El campo contraseña es obligatorio
+                            </mat-error>
+                            <!-- TODO: Implementar validación del formato de contraseña -->
+                        </mat-form-field>
+    
+                        <!-- Boton para submit del formulario -->
+                        <!-- Deshabilitado si el formulario de login es invalido -->
+                        <button class="btn_login" type="submit" mat-raised-button color="primary" [disabled]="confirmPassForm.invalid" >Iniciar sesión</button>
+                        <p class="footer-login">La contraseña debe tener al menos 8 caracteres e incluir números y letras.</p>
+                    </form>
+                </mat-card-content>
+
+                <div #toastContainer></div>
+
+            </mat-card>
+        </div>
+    </div>
+    <img class="login-imagen" src="../../../assets/img/balu_login.png" alt="Imagen de fondo" >
+</div>

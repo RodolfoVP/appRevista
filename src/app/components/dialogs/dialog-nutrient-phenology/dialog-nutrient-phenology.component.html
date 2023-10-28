@@ -1,0 +1,33 @@
+<div class="modal-contenedor">
+    <div class="logo-fenologia">
+      <mat-icon><img src="../../../../assets/img/icon-general/fenologia.svg" alt=""></mat-icon>
+    </div>
+    <h2 mat-dialog-title>Objetivos por Estado Fenológico</h2>
+    <mat-dialog-content class="modal-texto" >
+
+      <table mat-table [dataSource]="datosDuracion" class="table-duration">
+        <ng-container matColumnDef="DESCRIPTION">
+          <td class="fenologia-label" mat-cell *matCellDef="let data">{{ data.DESCRIPTION }}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="TARGET">
+          <td class="fenologia-input" mat-cell *matCellDef="let data">
+            <mat-form-field appearance="outline">
+              <mat-label>Objetivo (Kg/Ha)</mat-label>
+              <input matInput [(ngModel)]="data.TARGET" maxlength="3" [id]="'input-' + data.PHENOLOGYID" (input)="verificarInputs()" appNumberDecimal >
+
+            </mat-form-field>
+          </td>
+        </ng-container>
+      
+        <tr mat-row *matRowDef="let row; columns: ['DESCRIPTION', 'TARGET']"></tr>
+      </table>
+
+      <span *ngIf="tablaDisponible" >Primero configure los estados fenológicos de variedades</span>
+        
+    </mat-dialog-content>
+    <mat-dialog-actions class="nutrient-Phenology-botonera">
+      <button mat-raised-button mat-dialog-close class="boton-modal">Cancelar</button>
+      <button mat-raised-button  *ngIf="!tablaDisponible"  [mat-dialog-close]="true" class="boton-guardar" color="primary" (click)="actualizaDuracion()"  [disabled]="!todosInputsTienenValor">Guardar</button>
+    </mat-dialog-actions>
+  </div>

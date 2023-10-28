@@ -1,0 +1,75 @@
+<ng-container *ngIf="formularioListo;else cargando" >
+
+    <!-- Formulario insert -->
+    <div class="form-container">
+        <h2 class="form-title">{{titulo}}</h2>
+        <div class="form-fields">
+            <mat-card>
+    
+                <mat-card-content>
+                    <form class="campaign-card" [formGroup]="campaignForm" >
+                        <mat-form-field appearance="outline" [style.display]="'none'">
+                            <mat-label>Cod registro Campania</mat-label>
+                            <input  matInput formControlName="campaignIdReg"  [readonly]="true"  >
+                        </mat-form-field>
+
+                        <!-- Validaciones CAMPAIGNCODE  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Código</mat-label>
+                            <input  matInput formControlName="campaignCode"   maxlength="50" >
+                            <mat-error *ngIf="campaignCode?.errors?.['required'] && campaignCode?.touched ">
+                                El campo Código es obligatorio.
+                            </mat-error>
+                            <mat-error *ngIf="campaignCode?.errors?.['pattern']  && campaignCode?.touched ">
+                                El campo Código solo puede incluir caracteres alfanuméricos.
+                            </mat-error>
+                        </mat-form-field>
+                            
+                        <!-- Validaciones DESCRIPTION  -->
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput formControlName="description"  maxlength="256" >
+                            <mat-error *ngIf="description?.errors?.['required'] && description?.touched ">
+                                El campo Descripción es obligatorio.
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <!-- Validaciones INICIO  -->
+                        <div class="fila-fecha">
+                            <mat-form-field class="col-fecha-ini" appearance="outline" >
+                                <mat-label>Inicio</mat-label>
+                                <input matInput  [matDatepicker]="dp3" formControlName="startdate"  [readonly]="true">
+                                <mat-datepicker-toggle matIconSuffix matSuffix  [for]="dp3"></mat-datepicker-toggle>
+                                <mat-datepicker #dp3 disabled="false" color="primary"></mat-datepicker>
+                            </mat-form-field>
+    
+                            <!-- Validaciones FIN  -->
+                            <mat-form-field class="col-fecha-fin" appearance="outline">
+                                <mat-label>Fin (opcional)</mat-label>
+                                <input matInput  [matDatepicker]="dp1" formControlName="finishdate" [readonly]="true" >
+                                <mat-datepicker-toggle matIconSuffix matSuffix  [for]="dp1"></mat-datepicker-toggle>
+                                <button mat-icon-button matSuffix *ngIf="finishdate?.value != ''" (click)="limpiarFecha()">
+                                    <mat-icon>clear</mat-icon>
+                                  </button>
+                                <mat-datepicker #dp1 disabled="false" color="primary" ></mat-datepicker>
+                            </mat-form-field>    
+                        </div>    
+                        <!-- Alinear botones a la derecha -->
+                        <mat-card-actions class="campaign-botonera" >
+                            <button mat-raised-button class="btn-campaign-cancelar" (click)="goCancelar()" >Cancelar</button>
+                            <button mat-raised-button class="btn-campaign-confirmar" color="primary" [disabled]="campaignForm.invalid" (click)="ejecutarFormulario()" >Confirmar</button>
+                        </mat-card-actions> 
+    
+                    </form>
+                </mat-card-content>
+    
+            </mat-card>
+        </div>        
+    </div>
+
+</ng-container>
+<ng-template #cargando>
+    <app-spinner></app-spinner>
+</ng-template>
+
+ 
